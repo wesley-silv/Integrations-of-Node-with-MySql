@@ -2,9 +2,11 @@ const express = require('express')
 const mysql = require('mysql2')
 const bodyParser = require('body-parser')
 
+// Istancia a chamada da aplicação com express e define uma porta de acesso.
 const app = express()
 const port = 3080
 
+// Processa dados a partir do corpo da requisição
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 
@@ -30,7 +32,7 @@ connection.connect(err => {
 app.post('/insert-dates', (req, res) => {
   const { Code, Location, System, City } = req.body
 
-  // Corrigindo a query de inserção
+  // Query de inserção no banco de dados
   const query =
     'INSERT INTO gct_control (code, location, system, city) VALUES (?, ?, ?, ?)'
   connection.query(query, [Code, Location, System, City], (err, results) => {
@@ -39,7 +41,9 @@ app.post('/insert-dates', (req, res) => {
       res.status(500).send('Erro ao inserir dados no banco de dados.')
     } else {
       console.log('Dados inseridos com sucesso!')
-      res.status(200).send('Dados inseridos com sucesso!')
+      //res.status(200).send('Dados inseridos com sucesso!')
+      res.redirect(`http://localhost:${port}`)
+      console.log('Retorno à página inicial do formulário!')
     }
   })
 })
