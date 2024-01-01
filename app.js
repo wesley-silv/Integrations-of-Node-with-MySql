@@ -18,6 +18,7 @@ const connection = mysql.createConnection({
   database: 'gct'
 })
 
+// Check connection
 connection.connect(err => {
   if (err) {
     console.error('Erro ao conectar ao banco de dados:', err)
@@ -26,7 +27,7 @@ connection.connect(err => {
   }
 })
 
-app.post('/inserir-dados', (req, res) => {
+app.post('/insert-dates', (req, res) => {
   const { Code, Location, System, City } = req.body
 
   // Corrigindo a query de inserção
