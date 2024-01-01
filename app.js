@@ -10,6 +10,7 @@ app.use(bodyParser.json())
 
 // Inserindo dados a partir do formulário html
 app.use(express.static('public'))
+
 const connection = mysql.createConnection({
   host: 'localhost',
   user: 'root',
