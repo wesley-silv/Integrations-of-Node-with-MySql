@@ -30,12 +30,12 @@ connection.connect(err => {
 })
 
 app.post('/insert-dates', (req, res) => {
-  const { Code, Location, System, City } = req.body
+  const { Code, Location, System, City, Start_operation } = req.body
 
   // Query de inserção no banco de dados
   const query =
-    'INSERT INTO gct_control (code, location, system, city) VALUES (?, ?, ?, ?)'
-  connection.query(query, [Code, Location, System, City], (err, results) => {
+    'INSERT INTO gct_control (code, location, system, city, start_operation) VALUES (?, ?, ?, ?, ?)'
+  connection.query(query, [Code, Location, System, City, Start_operation], (err, results) => {
     if (err) {
       console.error('Erro ao inserir dados:', err)
       res.status(500).send('Erro ao inserir dados no banco de dados.')
