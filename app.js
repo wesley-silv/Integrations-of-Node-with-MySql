@@ -20,6 +20,9 @@ const connection = mysql.createConnection({
   database: 'gct'
 })
 
+// Exporta o aplicativo para uso em testes
+module.exports = app
+
 // Check connection
 connection.connect(err => {
   if (err) {
@@ -35,17 +38,21 @@ app.post('/insert-dates', (req, res) => {
   // Query de inserção no banco de dados
   const query =
     'INSERT INTO gct_control (code, location, system, city, start_operation) VALUES (?, ?, ?, ?, ?)'
-  connection.query(query, [Code, Location, System, City, Start_operation], (err, results) => {
-    if (err) {
-      console.error('Erro ao inserir dados:', err)
-      res.status(500).send('Erro ao inserir dados no banco de dados.')
-    } else {
-      console.log('Dados inseridos com sucesso!')
-      //res.status(200).send('Dados inseridos com sucesso!')
-      res.redirect(`http://localhost:${port}`)
-      console.log('Retorno à página inicial do formulário!')
+  connection.query(
+    query,
+    [Code, Location, System, City, Start_operation],
+    (err, results) => {
+      if (err) {
+        console.error('Erro ao inserir dados:', err)
+        res.status(500).send('Erro ao inserir dados no banco de dados.')
+      } else {
+        console.log('Dados inseridos com sucesso!')
+        //res.status(200).send('Dados inseridos com sucesso!')
+        res.redirect(`http://localhost:${port}`)
+        console.log('Retorno à página inicial do formulário!')
+      }
     }
-  })
+  )
 })
 
 app.listen(port, () => {
