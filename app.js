@@ -20,8 +20,6 @@ const connection = mysql.createConnection({
   database: 'gct'
 })
 
-// Exporta o aplicativo para uso em testes
-module.exports = app
 
 // Check connection
 connection.connect(err => {
@@ -32,6 +30,7 @@ connection.connect(err => {
   }
 })
 
+// Método de inserção de registros no banco de dados
 app.post('/insert-dates', (req, res) => {
   const { Code, Location, System, City, Start_operation } = req.body
 
