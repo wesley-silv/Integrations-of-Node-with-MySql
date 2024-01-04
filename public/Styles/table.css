@@ -1,0 +1,16 @@
+#tableEquipment {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+#tableEquipment th {
+  padding: 10px;
+  border: 1px solid #ddd;
+  background-color: #f2f2f2;
+}
+
+#tableEquipment td {
+  padding: 10px;
+  border: 1px solid #ddd;
+}

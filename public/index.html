@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./Styles/main.css" />
+    <link rel="stylesheet" href="./Styles/table.css" />
     <title>Gct - controle de equipamentos</title>
   </head>
   <body>
@@ -55,5 +56,37 @@
 
       <button type="submit">Enviar</button>
     </form>
+    <div class="tableEquipment" id="tableEquipment">
+      <script>
+        // Função para fazer a requisição e preencher a tabela
+        async function listEquipment() {
+          try {
+            const response = await fetch('http://localhost:3080/update-dates')
+            const equipamentos = await response.json()
+            preencherTabela(equipamentos)
+          } catch (error) {
+            console.error('Erro ao listar equipamentos:', error)
+          }
+        }
+
+        // Função para preencher a tabela com os dados
+        function preencherTabela(equipamentos) {
+          const tabela = document.getElementById('equipamentosTable')
+          const corpoTabela = tabela.createTBody()
+
+          equipamentos.forEach(equipamento => {
+            const linha = corpoTabela.insertRow()
+            linha.insertCell().textContent = equipamento.Code
+            linha.insertCell().textContent = equipamento.Location
+            linha.insertCell().textContent = equipamento.System
+            linha.insertCell().textContent = equipamento.City
+            linha.insertCell().textContent = equipamento.Start_operation
+          })
+        }
+
+        // Chamar a função para listar equipamentos quando a página carregar
+        window.onload = listEquipment
+      </script>
+    </div>
   </body>
 </html>
